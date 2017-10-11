@@ -1,0 +1,144 @@
+Home
+Fresh
+Each category
+Post
+User Profile
+Log in
+Sign up
+Settings (Protected Auth/user match)
+Feed (Protected Auth/user match)
+
+<Route>
+  <Switch>
+    <Route path='/' exact component={Home} />
+    <Route path='/fresh' component={Home} />
+    <Route path='category/:category' component={Category} />
+    <Route path='/post/:postId' component={Post} />
+    <Route path='u/:userId' component={User} />
+    <Route path='/feed' component={Feed} />
+    <Route path='/settings' component={Settings} />
+    <Route component={NotFound} />
+  </Switch>
+</Route>
+
+What container and presentational components do we need to create in order to test this route structure?
+
+In this stage of development, I should create container components for each route, where each renders a presentational component that displays some useful info about the current route.
+
+Containers:
+  Gallery: we could certainly use a single container component for all galleries (including the feed). We just need an elegant and simple way to tell it what post component to render depending on the route.
+  Post: for single post view.
+  UserProfile: for user profile.
+  Settings: for user account settings.
+  NotFound: to display when a route is not found.
+
+Before proceeding to create this test containers, think about the mess you can create if you are not careful with the gallery container and the different versions of post component to render depending on the route visited. How do we avoid creating this mess?
+
+Today I want to test the three component depth structure of my routes. I just need to make sure that I can pass route data to the last componente (presentational) in the component chain. This will allow for a clean, streamlined flow of info across components in this structure.
+
+My routes with params are not displaying. I must be missing some simple part of the parameterized route implementation.
+Fix the parameterized routes until you see them fully operational and then proceed to ponder on the component structure you will need for the galleries, including the redux pecularities about it.
+
+We need to find a way to know when we have specific params in the match object. Apparently, the params object is always available within match (I guess because of this object'r prototype).
+
+Cannot fix the params issue in  my routes yet. Could it be some obscure problem having to do with the fact that I am mixing non-parameterized routes with parameterized routes in my router? Read the source, Luke and find out what you can make of it.
+
+I found the BUG!!! It has to do with the static file route. I do not why, or how, but when I go to a parameterized route, the bundle.js file is taken from a weird route constructed from the /dist path provided in the server.js file and the current url in the brower address bar at the time the request is sent. Fix this, and it should all work marvelously. TLDR: the problem is in the static file route in the server.js file.
+
+Examine how the static file route is built to understand where the issue lies.
+
+I will try to set up an isomorphic app at once to make sure routes work on the client and on the server side. I have a general understanding as to how to make this happen, but I have my doubts as to how to structure the routes on the server side. Can I do it with a simple array or should it be in the same fashion as routes are structured on the client side?
+
+Need to set up Babel to compile both js and jsx in order to be able to run my server.js and render.js files.
+
+Now that Babel has been set up, and I have approximately built an isomorphic act, it is time to go back to the issue where I left: how do we render functionally different components based on the url?
+
+Routes are working, but not as I expect. The server is being hit more than required because the static bundle.js file is not being sent as expected due to the strange way in which the route for the static file is being created. Same problem as before, only that it is currently masked by my server coming in to the rescue when there is no bundle.js file to save the day.
+
+Fixed it. Changed the path to the static file in the script tag from './dist/bundle.js' to '/dist/bundle.js'.
+
+What is to be achieved tomorrow?
+I have already finished the set up phase. Webpack, Babel, react-router are all working like a charm. It is time now to start working on the substance.
+Tomorrow's plan is to redesign the component structure accross all routes (having in ming which components will be containers and which will be presentational, and considering which shall be connected to the redux store). Once we have a clear structure, go back to the previous project folder and go through the already coded components to see what can be salvaged.
+
+Ok. Lets get to the component structure per route.
+
+<Route>
+  <Switch>
+    <Route path='/' exact component={Gallery} />
+    <Route path='/fresh' component={Gallery} />
+    <Route path='category/:category' component={Gallery} />
+    <Route path='/post/:postId' component={Post} />
+    <Route path='u/:userId' component={User} />
+    <Route path='/feed' component={Feed} />
+    <Route path='/settings' component={Settings} />
+    <Route component={NotFound} />
+  </Switch>
+</Route>
+
+Home:   Gallery > Post > A collection of Components to build a single post.
+Fresh: Gallery > Post > A collection of Components to build a single post.
+Category: Gallery > Post > A collection of Components to build a single post.
+Post: Same as above plus comments. Wondering
+UserProfile
+Feed: Gallery > Post > A collection of Components to build a single post.
+Settings
+NotFound
+
+Which components shall we connect to the redux store? Gallery. I need to sit down with a notebook and a pencil, not a text editor.
+
+How will I start testing the views? I need to make use of my API to gather some data on my state and make sure it is displayed as I expect.
+As all galleries will have the same component structure and will perform the same actions, I think I need to have some posts in my API and test only the Fresh page first. To upload posts, I should work on the signUp/logIn part of the app to make sure it works, and to start uploading shit with that user. I guess I should start with this. I should start by registering a user through the local strategy first (to avoid messing around with the auth providers shit). I might be able to start. It would also be a good idea to start testing the image resizing on the client side to avoid stressing unnecessarily my server's cpu.
+
+What is the plan for tonight? We need to do something we can implement fast so we can receive the approppriate feedback. I am thinking a good way to start setting up and testing redux would be to open and display some test info in react modal.
+What do we need in order to do that?
+The modal depends on a prop to toggle between open and closed. We need a way to set that prop to the value of our desire. That is where redux comes in.
+
+Ok. Did not work when I ran the server script and called the url from the browser.
+I suspect the bug to be in the way I have set up my components and the redux bindings, or in the fact that I have not set up redux on the server side (server side rendering). Will figure this out tomorrow.
+
+I have isolated the bug. It is not the fact that it is not initially rendered on the server side. The problem lies within the connected component ModalButton.
+I can render any other component that is not connected, but I am failing to render this connected component. The problem is that store is not found in either the props or the context of the connected component. I am not correctly connecting the component to the redux store. What am I doing wrong? Once this is resolved, next step is to set up the server rendering with redux and react router.
+
+Thought the problem might lie with the fact that the component ModalButton was not being rendered within the Router's routes. Tried it with one of the components rendered by a specific route and still having the same problem. Error by failing to find the store in context or props. Why is my connected component not receiving the state?
+
+Have not fixed this yet. My last attempt was trying to eliminate a level of nesting by rendering App inside the provider component instead of root and then app. Still failing.
+
+Before moving on, I must make sure that the problem does not lie with the way my only reducer is formulated. I am not fully confident that it is correctly expressed and I do not know if it is causing the error or just noise. Either way, this is the next issue I got to tackle.
+
+Set up server rendering with redux in the simplest way possible.
+The app is not throwing an exception anymore, but it is not rendering. Check the component structure, make sure everything is imported and rendered correctly. Once you have verified that, make sure to connect the pertinent components to the redux store.
+
+The problem is that no html is sent to the client to be rendered. Of course, I see the problem now; I am not sendign the index.html file. Of course there is nothing to render.
+
+I have already set the app up, and it is working, just not as expected. It is hitting the server even when I navigate through links in the app. The server should not be hit in this case; the navigation should be handled entirely by the client. Fix this.
+
+TO DO FOR THE WEEKEND: set up version control in GitHub. I have already had my difficulties for lack of version control.
+
+The client is not hitting the server for every route. It is being handled by the router within the client, BUT with every navigational request, the server is being hit to serve static files (favicon).
+
+Next small experimental step is connecting the first component to the redux store and see how it works. I am failing at this. It seems like the client is not approppriately creating a store instance.
+
+I have managed to render some dom elements based on some store state's value. It means I am correctly connecting to the redux store, and I am correctly rendering on the server and passing the ball to the client's store instance. But it is somewhat disconcerting that I cannot render a state's property value. I can render based on its value, but I cannot render its value.
+Why?
+The other weird thing is that when I navigate through the links managed by the router at the client, I do not make a get request for an html file, but a request to the static files is fired (favicon.ico). Why? And how can I stop this?
+Food for thought.
+
+To test tomorrow: I think the component being unable to render the state values is due to the fact that it is a boolean, and perhaps not renderable as a dom node. Test this with a string value.
+
+OK. It was not rendering because I was trying to render a boolean value. Changed the test state to a string and worked flawlessly.
+Still having the issue of the request for the staticfile favicon.ico.
+
+Open modal button not working. Don't know why yet. Figure it out tomorrow.
+Lets begin by fixing this.
+
+I do not know why, but my TOGGLE_MODAL action seems to be firing upon creation of the store instance done for server rendering. How do I know this? Because the state logged before sending the response is the opposite to the default state set in the reducer (just what the dispatched action is supposed to cause).
+
+Fixed it, and learned an interesting lesson along the way.
+There were multiple issues with a common root. The value declaration of a prop inside the mapDispatchToProps function was flawed. I was declaring the value of the toggleModal prop to be dispatch(actionToDispatch()), which caused immediate firing of the dispatch method when evaluating the mapDispatchToProps function when connecting the component to the redux store. The propType error, toggleModal beign an object and not a function, occurred because the value returned by this prop was the action itself: an object value. Once the declaration of toggleModal in mapDispatchToProps was restructured into a function returning the dispatch method, everything was solved: no more involuntary firing of the dispatch method and the prop value is now a function value as expected.
+
+React router, react modal, and redux are all set. What is the next logical step? Start to introduce some non-test components. See what we can salvage from the old repository and start uploading creating some users and posts in the database to begin testing the spa with real data.
+
+I should start to create some users and posts in the DB, but I have not yet sat down and thought about how am I going to manage this. Current momentum drives me to continue testing any other tools that I might use on the front-end. I feel inclined to continue testing this tools. Redux form is next in line. I am thinkin about introducing a form into the react modal I have created.
+
+Managed to get a very simple test form running. Also did some refactoring in the TestModal component and ModalButton containers to adjust to clear component architecture: keeping logic and presentation apart.
