@@ -3,13 +3,12 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import { modalIsOpen } from './modal';
+import { entities } from './entities';
 import { TOGGLE_MODAL } from '../actions/modal';
-// Will probably have to import a redux form reducer to be included in our
-// store.
-
 
 const rootReducer = combineReducers({
     modalIsOpen,
+    entities,
     form: formReducer
 })
 

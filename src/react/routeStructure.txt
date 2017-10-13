@@ -142,3 +142,16 @@ React router, react modal, and redux are all set. What is the next logical step?
 I should start to create some users and posts in the DB, but I have not yet sat down and thought about how am I going to manage this. Current momentum drives me to continue testing any other tools that I might use on the front-end. I feel inclined to continue testing this tools. Redux form is next in line. I am thinkin about introducing a form into the react modal I have created.
 
 Managed to get a very simple test form running. Also did some refactoring in the TestModal component and ModalButton containers to adjust to clear component architecture: keeping logic and presentation apart.
+
+Already set up a new repository with the SPA directory. What now?
+Lets build the Post component.
+
+I am trying to make sure the basis of my components is solid so I do not have to rework any of it, and can continue to confidently build on them as I progress.
+Before making the commit and push of this branch, I just want to be able to visualize the looped components in the browser. After I am done with that, I will proceed.
+
+Different errors for a minor change in the syntax of a statement that seeks access to a nested property of an object: state.entities.posts vs state.entities[posts]. I have faced this situation before but I do not know what is the difference.
+I do not even know if this is the only bug. All I know is that this difference in syntax throws different errors. What does this mean? Does it mean I have at least two bugs? No commiting until I solve this.
+
+Import lessons learned today. Fixed the firts issue by fixing some syntax issues and a missing module export. The syntax error was that I removed wrapping tags to the component from the mapper function employed to loop through the array. Fixed the second issue by exporting a component.
+The other lesson learned was a more of a confirmation rather than a lesson.
+I had the understanding that with react router the component wrapped with it would be updated with a change in route. It is. Is it time for a commit? Yes.
