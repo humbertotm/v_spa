@@ -1,23 +1,60 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
-import Post from './Post'
 import { connect } from 'react-redux';
+import GalleryPost from '../components/GalleryPost';
+// import { loadOrFetchPost } from 'some/action/file/path'
 
 class Gallery extends Component {
+    constructor() {
+        super()
+        // this.fetchMorePosts = this.fetchMorePosts.bind(this)
+    }
+
+/*
+    componentDidMount() {
+        // Dispatch action to load or fetch posts.
+    }
+*/
+
+    componentDidUpdate() {
+        console.log('Component updated by change in route!')
+    }
+
+/*
+    fetchMorePosts() {
+        // Dispatch action to fetch more posts.
+    }
+*/
+
     render() {
-        const { match, modalIsOpen } = this.props
+        // Not sure ul and li tags are the approppriate ones for this use case.
+        const { posts } = this.props
+        const postList = posts.map((post) => {
+            return(
+                <GalleryPost key={post.id} name={post.name} />
+            );
+        })
+
         return(
-            <div>
-                <h1>Gallery {match.url}</h1>
-                <Post url={match} />
-            </div>
+            <ul>{postList}</ul>
         );
     }
 }
 
+/*
+const mapDispatchToProps = dispatch => {
+    return {
+        loadOrFetchPosts: () => {
+            return dispatch(loadOrFetchPosts())
+        }
+    }
+}
+*/
+
 const mapStateToProps = state => {
     return {
-        modalIsOpen: state.modalIsOpen
+        posts: state.entities.posts
     }
 }
 
