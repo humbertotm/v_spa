@@ -155,3 +155,7 @@ I do not even know if this is the only bug. All I know is that this difference i
 Import lessons learned today. Fixed the firts issue by fixing some syntax issues and a missing module export. The syntax error was that I removed wrapping tags to the component from the mapper function employed to loop through the array. Fixed the second issue by exporting a component.
 The other lesson learned was a more of a confirmation rather than a lesson.
 I had the understanding that with react router the component wrapped with it would be updated with a change in route. It is. Is it time for a commit? Yes.
+
+For this next commit I shall continue building the foundations of the single post view.
+
+Time for a commit. Built the post foundation that will provided the basis for the Gallery posts and the single post view. Already built the component cascade for the post route; same for gallery route. We will fill in the rest of the logic as we continue to progress.

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import GalleryPost from '../components/GalleryPost';
+import Post from '../components/Post';
 // import { loadOrFetchPost } from 'some/action/file/path'
 
 class Gallery extends Component {
@@ -32,7 +32,9 @@ class Gallery extends Component {
         const { posts } = this.props
         const postList = posts.map((post) => {
             return(
-                <GalleryPost key={post.id} name={post.name} />
+                <li>
+                    <Post key={post.id} name={post.name} />
+                </li>
             );
         })
 
