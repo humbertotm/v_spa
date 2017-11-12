@@ -159,3 +159,21 @@ I had the understanding that with react router the component wrapped with it wou
 For this next commit I shall continue building the foundations of the single post view.
 
 Time for a commit. Built the post foundation that will provided the basis for the Gallery posts and the single post view. Already built the component cascade for the post route; same for gallery route. We will fill in the rest of the logic as we continue to progress.
+
+I have been thinking about what would be the better approach? Thrusting wide and shallowly, or narrow and deep? If I do it the latter, I am afraid I will end again in the same circle, were nothing much is accomplished due to the fact that not much has been tested to be seen visually in the browser. That is an important part of the feedback. So, we will continue with the Gallery interface, until we see post after post in the browser.
+
+How do we begin with this? I already set the branch name to api-middleware.
+Go back to review the old api file, but before doing that, reflect on what the data you are going to need to test this.
+Ok. I just need my api to provide me with post data. I can just create the posts I need in a test schma to verify that the data is displayed in the browser.
+This way, we will be testing at once our components, our redux store, and our api middleware. We are not done yet to allow ourseveles to make a commit. Need to make sure this middleware is going to truly connect to the api. Lets add it to the store at once.
+
+For now, I am done with the api middleware. The next step is to put some posts in a database to make sure my client is working as expected.
+Before moving on, lets think for a second about what is the best approach to accomplish this. Should I tinker with api I already have, or should I just build a simple endpoint in a test api? I think this is the easier and probably faster.
+Lets map this simple opertaion from the very beginning, even the setup.
+
+1. Need to set up a new node js project.
+2. Set up a new test database in mLab (or wherever it is free).
+3. Create two collections in your test database: Users and Posts.
+4. Build a script (node js) to create 5 users and 20 posts in the database,
+   having each Post have a user property which will correspond to any of our previously created users.
+5. Create an express app that will provide an endpoint to retrieve this test posts.
