@@ -1,20 +1,3 @@
-// We will do our simplest api test right here.
-// All that is aimed to be accomplished with this simple test is to
-// get the post items from our mock api and store them in our app's state.
-
-// We will start experimenting with the RxJS library to begin working with streams.
-
-/*
-Lets begin by defining in plain English what the flow to be followed will be.
-We need to make an http request to a specific endpoint and then console.log
-the response.
-Since we are using redux, I should dispatch an action creator to trigger
-this request.
-Maybe I am jumping way ahead. How about I just make a request to the endpoint
-and console.log the response for starters?
-Lets begin by creating this script.
-*/
-
 import Rx from 'rxjs/Rx';
 import axios from 'axios';
 
@@ -22,6 +5,10 @@ import axios from 'axios';
 // Subscribe to that observable, and create a nested osbserver in the
 // subscriber function that emits a request to the query string.
 
+// Call Api symbol
+export const CALL_API = Symbol('Call Api');
+
+/*
 const requestUrlStream = Rx.Observable.of('http://localhost:3000/posts');
 
 const responseStream = requestUrlStream
@@ -30,9 +17,41 @@ const responseStream = requestUrlStream
     });
 
 responseStream.subscribe(response => {
-    return console.log(response.data);
+    // return console.log(response.data);
+    return response.status;
 });
+*/
 
-// Not working. Cannot find module rxjs/Rx when transpiling it.
-// Principal suspect: I used an es version of the library, and when
-// transpiled, it runs on ES5.
+export default store => next => action => {
+    const callApi = action[CALL_API];
+    if(callApi === undefined) return next(action);
+
+    console.log('Firing api middleware.');
+
+
+    // >> Store action types in variables
+    const { types } = callApi;
+    console.log(types);
+
+    const actionWith = (data) => {
+        // return an action with the pertinent data
+        const finalAction = Object.assign({}, action, {
+            type: data
+        })
+        console.log('actionWith called with ' + data)
+        delete finalAction[CALL_API]
+        console.log(finalAction)
+        return finalAction
+    }
+
+    const [ requestType, successType, failureType ] = types
+    next(actionWith(requestType));
+
+    const response = 200;
+    if(response >= 400) {
+        // pass a failure action to next function in middleware chain
+        return next(actionWith(failureType));
+    }
+
+    return next(actionWith(successType));
+}

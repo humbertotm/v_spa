@@ -3,19 +3,21 @@ import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Post from '../components/Post';
-// import { loadOrFetchPost } from 'some/action/file/path'
+import { callApi } from '../../redux/actions/mockApiCall'
+// import { testActionCreator } from '../../redux/middleware/testApi'
 
 class Gallery extends Component {
     constructor() {
         super()
-        // this.fetchMorePosts = this.fetchMorePosts.bind(this)
     }
 
-/*
     componentDidMount() {
         // Dispatch action to load or fetch posts.
+        console.log(this.props);
+        this.props.mockApiCall();
+
     }
-*/
+
 
     componentDidUpdate() {
         console.log('Component updated by change in route!')
@@ -44,20 +46,19 @@ class Gallery extends Component {
     }
 }
 
-/*
-const mapDispatchToProps = dispatch => {
-    return {
-        loadOrFetchPosts: () => {
-            return dispatch(loadOrFetchPosts())
+function mapDispatchToProps(dispatch) {
+    return ({
+        mockApiCall: () => {
+            dispatch(callApi());
         }
-    }
+    });
 }
-*/
 
-const mapStateToProps = state => {
+function mapStateToProps(state) {
     return {
         posts: state.entities.posts
     }
 }
 
-export default withRouter(connect(mapStateToProps)(Gallery))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Gallery))
+
