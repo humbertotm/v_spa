@@ -5,10 +5,12 @@ import { reducer as formReducer } from 'redux-form';
 import { modalIsOpen } from './modal';
 import { entities } from './entities';
 import { TOGGLE_MODAL } from '../actions/modal';
+import { apiResponse } from './testReducer';
 
 const rootReducer = combineReducers({
     modalIsOpen,
     entities,
+    apiResponse,
     form: formReducer
 })
 
