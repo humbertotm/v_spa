@@ -35,9 +35,7 @@ export default store => next => action => {
 
     const actionWith = (data) => {
         // return an action with the pertinent data
-        const finalAction = Object.assign({}, action, {
-            type: data
-        })
+        const finalAction = Object.assign({}, action, data)
         console.log('actionWith called with ' + data)
         delete finalAction[CALL_API]
         console.log(finalAction)
@@ -46,15 +44,26 @@ export default store => next => action => {
 
     const [ requestType, successType, failureType ] = types
 
-    next(actionWith(requestType));
+    next(actionWith({
+        type: requestType
+    }));
 
     return axios.get('http://localhost:3000/posts')
         .then(response => {
             console.log(response.status);
-            return next(actionWith(successType));
+            const posts = response.data;
+            // JSON string
+            console.log(response.data);
+            return next(actionWith({
+                type: successType,
+                data: posts
+            }));
         }).catch(error => {
-            console.log(error.response.status);
-            return next(actionWith(failureType));
+            // console.log(error.response.status);
+            return next(actionWith({
+                type: failureType,
+                error: error.response[data]
+            }));
         });
 }
 
