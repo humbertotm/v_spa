@@ -32,16 +32,16 @@ class Gallery extends Component {
     render() {
         // Not sure ul and li tags are the approppriate ones for this use case.
         const { posts } = this.props
-        const postList = posts.map((post) => {
-            return(
+        const postList = posts.map((post) =>
                 <li>
-                    <Post key={post.id} name={post.name} />
+                    <Post key={post._id} imageUrl={post.imageUrl} />
                 </li>
-            );
-        })
+        )
 
         return(
-            <ul>{postList}</ul>
+            <ul>
+                {postList}
+            </ul>
         );
     }
 }
