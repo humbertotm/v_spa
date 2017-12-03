@@ -51,7 +51,7 @@ export default store => next => action => {
     return axios.get('http://localhost:3000/posts')
         .then(response => {
             console.log(response.status);
-            const posts = response.data;
+            const posts = response.data.posts;
             // JSON string
             console.log(response.data);
             return next(actionWith({

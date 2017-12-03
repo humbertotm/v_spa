@@ -21,10 +21,10 @@ class Post extends Component {
     }
 
     render() {
-        const { name } = this.props
+        const { imageUrl } = this.props
 
         return(
-            <p>{name}</p>
+            <p>{imageUrl}</p>
         );
     }
 }
