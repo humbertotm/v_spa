@@ -1,6 +1,6 @@
-import Rx from 'rxjs/Rx';
+// import Rx from 'rxjs/Rx';
 import axios from 'axios';
-
+// import { normlaize, schema } from 'normalizr';
 // Create an observable that emits the query string.
 // Subscribe to that observable, and create a nested osbserver in the
 // subscriber function that emits a request to the query string.
@@ -21,6 +21,9 @@ responseStream.subscribe(response => {
     return response.status;
 });
 */
+
+// Entities' schema employed at normalizing data
+// const post = new schema.Entity('posts');
 
 export default store => next => action => {
     const callApi = action[CALL_API];
@@ -51,9 +54,10 @@ export default store => next => action => {
     return axios.get('http://localhost:3000/posts')
         .then(response => {
             console.log(response.status);
-            const posts = response.data.posts;
-            // JSON string
             console.log(response.data);
+
+            const posts = response.data.posts;
+            // const normalizedPosts = normalize(posts, post);
             return next(actionWith({
                 type: successType,
                 data: posts
@@ -62,7 +66,7 @@ export default store => next => action => {
             // console.log(error.response.status);
             return next(actionWith({
                 type: failureType,
-                error: error.response[data]
+                error: error.response.data
             }));
         });
 }
