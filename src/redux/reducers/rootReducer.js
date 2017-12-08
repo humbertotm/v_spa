@@ -6,11 +6,13 @@ import { modalIsOpen } from './modal';
 import { entities } from './entities';
 import { TOGGLE_MODAL } from '../actions/modal';
 import { apiResponse } from './testReducer';
+import { session } from './sessionReducer';
 
 const rootReducer = combineReducers({
     modalIsOpen,
     entities,
     apiResponse,
+    session,
     form: formReducer
 })
 
