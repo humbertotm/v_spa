@@ -1,4 +1,4 @@
-const export SESSION_TYPE = 'SESSION_TYPE'
+export const SESSION_TYPE = 'SESSION_TYPE'
 
 export function session() {
     return {
