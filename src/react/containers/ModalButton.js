@@ -20,9 +20,11 @@ class ModalButton extends Component {
 
     render() {
         const { modalIsOpen, toggleModal } = this.props
+        const buttonText = 'Open Test Modal';
         return(
             <div>
-                <OpenButton toggleModal={toggleModal} />
+                <OpenButton actionToPerform={toggleModal}
+                            buttonText={buttonText} />
                 <TestModal modalIsOpen={modalIsOpen}
                            toggleModal={toggleModal}
                            formSubmit={this.formSubmit} />

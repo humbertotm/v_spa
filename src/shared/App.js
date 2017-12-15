@@ -6,7 +6,7 @@ import UserProfile from '../react/containers/UserProfile';
 import Settings from '../react/containers/Settings';
 import NotFound from '../react/components/NotFound';
 import ModalButton from '../react/containers/ModalButton';
-// import TestComponent from '../react/components/TestComponent';
+import SessionButton from '../react/containers/sessionButton';
 
 class App extends Component {
     render() {
@@ -18,6 +18,7 @@ class App extends Component {
                 </ul>
 
                 <ModalButton />
+                <SessionButton />
 
                 <Switch>
                     <Route exact={true} path='/' component={Gallery} />
