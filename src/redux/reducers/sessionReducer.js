@@ -5,7 +5,6 @@ export function session(state = { loggedIn: false }, action) {
         return Object.assign({}, state, {
             loggedIn: !state.loggedIn
         });
-        // return !state;
     }
 
     return state
