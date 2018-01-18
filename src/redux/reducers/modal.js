@@ -10,7 +10,7 @@ export function modalIsOpen(state = { isOpen: false }, action) {
 
         case LOG_IN:
             return Object.assign({}, state, {
-                isOpen: !state.isOpen
+                isOpen: false
             })
 
         default:
