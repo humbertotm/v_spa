@@ -4,7 +4,7 @@ import TestForm from '../../redux-form/formComponents/TestForm';
 
 class TestModal extends Component {
     render() {
-        const { modalIsOpen, toggleModal } = this.props
+        const { modalIsOpen, toggleModal, handleSubmit } = this.props
         return(
             <div>
                 <Modal isOpen={modalIsOpen}

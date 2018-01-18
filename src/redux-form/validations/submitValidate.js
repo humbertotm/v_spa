@@ -22,15 +22,21 @@ export default function submitValidate(values, dispatch) {
         }).catch(error => {
             // if the response status != 200
             if(error.response) {
+                console.log('error.response')
+                console.log(error.response)
                 throw new SubmissionError({
                     _error: 'Invalid email/password combination.'
                 })
             // Request made but no response received
             } else if (error.request) {
-                dispatch(setErrorMessage(error.request));
+                console.log('error.request')
+                console.log(error.request)
+                dispatch(setErrorMessage('No response received.'))
             // Something happended setting up the request.
             } else {
-                dispatch(setErrorMessage(error.message))
+                console.log('error')
+                console.log(error)
+                dispatch(setErrorMessage('Error on request.'))
             }
         })
 }
