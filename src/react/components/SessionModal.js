@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-import TestForm from '../../redux-form/formComponents/TestForm';
+import LogInForm from '../../redux-form/formComponents/LogInForm';
 
-class TestModal extends Component {
+class SessionModal extends Component {
     render() {
         const { modalIsOpen, toggleModal, handleSubmit } = this.props
         return(
@@ -11,11 +11,11 @@ class TestModal extends Component {
                     onRequestClose={toggleModal}
                     contentLabel='test-modal' >
                     <h1>This is a Test Modal working with Redux!</h1>
-                    <TestForm />
+                    <LogInForm />
                 </Modal>
             </div>
         );
     }
 }
 
-export default TestModal
+export default SessionModal

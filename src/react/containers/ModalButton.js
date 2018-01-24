@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import OpenButton from '../components/OpenButton';
-import TestModal from '../components/TestModal';
+import SessionModal from '../components/SessionModal';
 import { toggleModal } from '../../redux/actions/modal';
 import { connect } from 'react-redux';
 
@@ -13,7 +13,7 @@ class ModalButton extends Component {
             <div>
                 <OpenButton actionToPerform={toggleModal}
                             buttonText={buttonText} />
-                <TestModal modalIsOpen={modalIsOpen}
+                <SessionModal modalIsOpen={modalIsOpen}
                            toggleModal={toggleModal} />
             </div>
         );

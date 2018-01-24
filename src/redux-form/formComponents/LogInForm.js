@@ -6,7 +6,7 @@ import { SubmissionError } from 'redux-form';
 import submitValidate from '../validations/submitValidate';
 import logIn from '../../redux/actions/logIn';
 
-class TestForm extends Component {
+class LogInForm extends Component {
     constructor() {
         super()
         this.renderField = this.renderField.bind(this)
@@ -83,4 +83,4 @@ class TestForm extends Component {
 export default reduxForm({
     form: 'test',
     validate: logInSyncValidate
-})(TestForm)
+})(LogInForm)

@@ -4,7 +4,7 @@ import { TEST_API_BASE_DEV_URL } from '../../utils/constantGlossary';
 import logIn from '../../redux/actions/logIn';
 import setErrorMessage from '../../redux/actions/setErrorMessage';
 
-function callApi(values) {
+function callApiForLogIn(values) {
     return axios({
         method: 'post',
         url: TEST_API_BASE_DEV_URL + '/login',
@@ -16,7 +16,7 @@ function callApi(values) {
 }
 
 export default function submitValidate(values, dispatch) {
-    callApi(values)
+    callApiForLogIn(values)
     .then(response => {
             dispatch(logIn(response.data));
         }).catch(error => {
