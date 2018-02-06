@@ -7,6 +7,7 @@ import { entities } from './entities';
 import { TOGGLE_MODAL } from '../actions/modal';
 import { apiResponse } from './testReducer';
 import { session } from './sessionReducer';
+import { signupLoginForm } from './signupLoginFormReducer';
 import { errorMessage } from './errorMessageReducer';
 
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     entities,
     apiResponse,
     session,
+    signupLoginForm,
     errorMessage,
     form: formReducer
 })
