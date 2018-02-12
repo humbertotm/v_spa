@@ -4,7 +4,6 @@ class SignUpLogInPrompt extends Component {
     constructor() {
         super()
         this.signUpLogInPrompt = this.signUpLogInPrompt.bind(this)
-        this.handleClick = this.handleClick.bind(this)
     }
 
     signUpLogInPrompt() {
@@ -14,10 +13,6 @@ class SignUpLogInPrompt extends Component {
 
         if(currentFormIsSignUp) return logInPrompt;
         return signUpPrompt;
-    }
-
-    handleClick() {
-        console.log('Click from signuplogin form.')
     }
 
     render() {
