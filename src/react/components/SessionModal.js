@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-import LogInForm from '../../redux-form/formComponents/LogInForm';
+import SessionForm from '../../redux-form/formComponents/SessionForm';
 import SignUpLogInPrompt from './SignUpLogInPrompt';
 
 class SessionModal extends Component {
@@ -26,9 +26,9 @@ class SessionModal extends Component {
             <div>
                 <Modal isOpen={modalIsOpen}
                     onRequestClose={toggleModal}
-                    contentLabel='test-modal' >
+                    contentLabel='session-modal' >
                     <h1>{this.setFormTitle()}</h1>
-                    <LogInForm />
+                    <SessionForm currentFormIsSignUp={currentFormIsSignUp} />
                     <SignUpLogInPrompt toggleFormPurpose={toggleFormPurpose}
                                        currentFormIsSignUp={currentFormIsSignUp} />
                 </Modal>
