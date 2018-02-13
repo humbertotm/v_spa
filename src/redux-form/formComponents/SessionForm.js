@@ -1,9 +1,8 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import logInSyncValidate from '../validations/logInSync';
+import sessionFormSyncValidate from '../validations/sessionFormSyncValidate';
 import { SubmissionError } from 'redux-form';
-import submitValidate from '../validations/submitValidate';
 import logIn from '../../redux/actions/logIn';
 import setErrorMessage from '../../redux/actions/setErrorMessage';
 
@@ -21,7 +20,7 @@ class SessionForm extends Component {
         this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this)
         this.handleErrorResponse = this.handleErrorResponse.bind(this)
         this.handleSignUpFormError = this.handleSignUpFormError.bind(this)
-        this.handleSignUpFormErrorStatuses = this.handleSignUpFormErrorStatuses.bind(this)
+        this.handleErrorForHttpStatus = this.handleErrorForHttpStatus.bind(this)
         this.handleLogInFormError = this.handleLogInFormError.bind(this)
     }
 
@@ -74,7 +73,7 @@ class SessionForm extends Component {
         if(error.response) {
             console.log('Sign up error.response');
             console.log(error.response.status);
-            this.handleSignUpFormErrorStatuses(error.response.status);
+            this.handleErrorForHttpStatus(error.response.status);
         } else if(error.request) {
             console.log('error.request sign up')
             dispatch(setErrorMessage('No response received.'))
@@ -84,7 +83,7 @@ class SessionForm extends Component {
         }
     }
 
-    handleSignUpFormErrorStatuses(errorStatus) {
+    handleErrorForHttpStatus(errorStatus) {
         if(errorStatus === 409) {
             throw new SubmissionError({
                 _error: 'Email already in use.'
@@ -149,5 +148,5 @@ class SessionForm extends Component {
 
 export default reduxForm({
     form: 'test',
-    validate: logInSyncValidate
+    validate: sessionFormSyncValidate
 })(SessionForm)
