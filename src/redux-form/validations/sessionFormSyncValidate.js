@@ -9,7 +9,7 @@ function isValidEmail(email) {
     return EMAIL_REGEX.test(email)
 }
 
-export default function logInSyncValidate(values) {
+export default function sessionFormSyncValidate(values) {
     const errors = {}
 
     if(!values.email) {

@@ -6,7 +6,7 @@ import { toggleModal } from '../../redux/actions/modal';
 import { toggleFormPurpose } from '../../redux/actions/toggleFormPurpose';
 import { connect } from 'react-redux';
 
-class ModalButton extends Component {
+class SessionModalButton extends Component {
     render() {
         const { modalIsOpen,
                 toggleModal,
@@ -44,7 +44,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-ModalButton.propTypes = {
+SessionModalButton.propTypes = {
     toggleModal: PropTypes.func,
     modalIsOpen: PropTypes.bool,
     currentFormIsSignUp: PropTypes.bool,
@@ -54,4 +54,4 @@ ModalButton.propTypes = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ModalButton)
+)(SessionModalButton)

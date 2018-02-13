@@ -5,7 +5,7 @@ import PostView from '../react/containers/PostView';
 import UserProfile from '../react/containers/UserProfile';
 import Settings from '../react/containers/Settings';
 import NotFound from '../react/components/NotFound';
-import ModalButton from '../react/containers/ModalButton';
+import SessionModalButton from '../react/containers/SessionModalButton';
 
 class App extends Component {
     render() {
@@ -16,7 +16,7 @@ class App extends Component {
                     <li><Link to='/fresh'>Fresh</Link></li>
                 </ul>
 
-                <ModalButton />
+                <SessionModalButton />
 
                 <Switch>
                     <Route exact={true} path='/' component={Gallery} />
