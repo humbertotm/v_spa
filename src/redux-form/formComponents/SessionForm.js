@@ -5,6 +5,7 @@ import sessionFormSyncValidate from '../validations/sessionFormSyncValidate';
 import { SubmissionError } from 'redux-form';
 import logIn from '../../redux/actions/logIn';
 import setErrorMessage from '../../redux/actions/setErrorMessage';
+import SignUpLogInPrompt from '../../react/components/SignUpLogInPrompt';
 
 // Constants
 import { signupEndpoint,
@@ -126,7 +127,8 @@ class SessionForm extends Component {
     }
 
     render() {
-        const { handleSubmit, pristine, reset, submitting, error } = this.props
+        const { handleSubmit, pristine, reset, submitting, error,
+                currentFormIsSignUp, toggleFormPurpose } = this.props
         return(
             <form onSubmit={handleSubmit(this.submitValidate)}>
                 <Field
@@ -141,6 +143,9 @@ class SessionForm extends Component {
                     label='Password' />
                 { error && <strong>{error}</strong> }
                 <button type='submit'>Submit</button>
+                <SignUpLogInPrompt reset={reset}
+                                   toggleFormPurpose={toggleFormPurpose}
+                                   currentFormIsSignUp={currentFormIsSignUp} />
             </form>
         );
     }

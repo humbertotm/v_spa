@@ -28,9 +28,8 @@ class SessionModal extends Component {
                     onRequestClose={toggleModal}
                     contentLabel='session-modal' >
                     <h1>{this.setFormTitle()}</h1>
-                    <SessionForm currentFormIsSignUp={currentFormIsSignUp} />
-                    <SignUpLogInPrompt toggleFormPurpose={toggleFormPurpose}
-                                       currentFormIsSignUp={currentFormIsSignUp} />
+                    <SessionForm currentFormIsSignUp={currentFormIsSignUp}
+                                 toggleFormPurpose={toggleFormPurpose} />
                 </Modal>
             </div>
         );
@@ -38,3 +37,6 @@ class SessionModal extends Component {
 }
 
 export default SessionModal
+
+// <SignUpLogInPrompt toggleFormPurpose={toggleFormPurpose}
+//                                        currentFormIsSignUp={currentFormIsSignUp} />

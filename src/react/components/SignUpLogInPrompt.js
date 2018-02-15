@@ -4,6 +4,7 @@ class SignUpLogInPrompt extends Component {
     constructor() {
         super()
         this.signUpLogInPrompt = this.signUpLogInPrompt.bind(this)
+        this.toggleFormAndCleanErrorMsgs = this.toggleFormAndCleanErrorMsgs.bind(this)
     }
 
     signUpLogInPrompt() {
@@ -15,10 +16,17 @@ class SignUpLogInPrompt extends Component {
         return signUpPrompt;
     }
 
+    toggleFormAndCleanErrorMsgs() {
+        const { reset, toggleFormPurpose } = this.props
+
+        reset();
+        toggleFormPurpose();
+    }
+
     render() {
-        const { toggleFormPurpose } = this.props
+        // const { toggleFormPurpose } = this.props
         return(
-            <div onClick={toggleFormPurpose}>
+            <div onClick={this.toggleFormAndCleanErrorMsgs}>
                 <a href='#'>
                     {this.signUpLogInPrompt()}
                 </a>
