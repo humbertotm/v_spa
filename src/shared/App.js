@@ -4,8 +4,10 @@ import Gallery from '../react/containers/Gallery';
 import PostView from '../react/containers/PostView';
 import UserProfile from '../react/containers/UserProfile';
 import Settings from '../react/containers/Settings';
+import ResetPassword from '../react/containers/ResetPassword';
 import NotFound from '../react/components/NotFound';
-import SessionModalButton from '../react/containers/SessionModalButton';
+// import SessionModalButton from '../react/containers/SessionModalButton';
+import SessionButtons from '../react/containers/SessionButtons';
 
 class App extends Component {
     render() {
@@ -16,7 +18,9 @@ class App extends Component {
                     <li><Link to='/fresh'>Fresh</Link></li>
                 </ul>
 
-                <SessionModalButton />
+                <div className='topbar'>
+                    <SessionButtons />
+                </div>
 
                 <Switch>
                     <Route exact={true} path='/' component={Gallery} />
@@ -26,6 +30,7 @@ class App extends Component {
                     <Route exact={true} path='/u/:userId' component={UserProfile} />
                     <Route exact={true} path='/feed' component={Gallery} />
                     <Route exact={true} path='/settings' component={Settings} />
+                    <Route exact={true} path='/resetpassword' component={ResetPassword} />
                     <Route component={NotFound} />
                 </Switch>
             </div>

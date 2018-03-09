@@ -9,7 +9,7 @@ export function isValidEmail(email) {
     return EMAIL_REGEX.test(email)
 }
 
-export default function sessionFormSyncValidate(values) {
+export default function signUpSyncValidate(values) {
     const errors = {}
 
     if(!values.email) {
@@ -22,6 +22,12 @@ export default function sessionFormSyncValidate(values) {
         errors.password = 'Password required.'
     } else if (!isValidPassword(values.password)) {
         errors.password = 'Invalid password.'
+    }
+
+    if(!values.passwordConf) {
+        errors.passwordConf = 'Password confirmation required.'
+    } else if(!isValidPassword(values.passwordConf) || values.passwordConf != values.password) {
+        errors.passwordConf = 'Password confirmation does not match password.'
     }
 
     return errors

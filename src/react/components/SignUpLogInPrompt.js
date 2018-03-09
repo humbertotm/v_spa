@@ -4,27 +4,36 @@ class SignUpLogInPrompt extends Component {
     constructor() {
         super()
         this.signUpLogInPrompt = this.signUpLogInPrompt.bind(this)
+        this.setFormPurposeFuncArg = this.setFormPurposeFuncArg.bind(this)
         this.toggleFormAndCleanErrorMsgs = this.toggleFormAndCleanErrorMsgs.bind(this)
     }
 
     signUpLogInPrompt() {
-        const { currentFormIsSignUp } = this.props
+        const { currentFormIs } = this.props
         const signUpPrompt = 'No account yet? Sign up!'
         const logInPrompt = 'Have an account already? Log in!'
 
-        if(currentFormIsSignUp) return logInPrompt;
+        if(currentFormIs === 'signup') return logInPrompt;
         return signUpPrompt;
     }
 
+    setFormPurposeFuncArg() {
+        const { currentFormIs } = this.props
+        const signup = 'signup'
+        const login = 'login'
+
+        if(currentFormIs === signup) return login;
+        return signup;
+    }
+
     toggleFormAndCleanErrorMsgs() {
-        const { reset, toggleFormPurpose } = this.props
+        const { reset, setFormPurpose } = this.props
 
         reset();
-        toggleFormPurpose();
+        setFormPurpose(this.setFormPurposeFuncArg());
     }
 
     render() {
-        // const { toggleFormPurpose } = this.props
         return(
             <div onClick={this.toggleFormAndCleanErrorMsgs}>
                 <a href='#'>

@@ -6,3 +6,5 @@ export const TEST_API_BASE_DEV_URL = 'http://localhost:3000'
 export const signupEndpoint = TEST_API_BASE_DEV_URL + '/signup'
 
 export const loginEndpoint = TEST_API_BASE_DEV_URL + '/login'
+
+export const passwordResetEndpoint = TEST_API_BASE_DEV_URL + '/resetpassword'
