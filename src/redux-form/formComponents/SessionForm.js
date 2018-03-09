@@ -6,6 +6,7 @@ import { SubmissionError } from 'redux-form';
 import logIn from '../../redux/actions/logIn';
 import setErrorMessage from '../../redux/actions/setErrorMessage';
 import SignUpLogInPrompt from '../../react/components/SignUpLogInPrompt';
+import ResetPasswordForm from './ResetPasswordForm';
 
 // Constants
 import { signupEndpoint,
@@ -23,6 +24,9 @@ class SessionForm extends Component {
         this.handleSignUpFormError = this.handleSignUpFormError.bind(this)
         this.handleErrorForHttpStatus = this.handleErrorForHttpStatus.bind(this)
         this.handleLogInFormError = this.handleLogInFormError.bind(this)
+        this.setApproppriateForm = this.setApproppriateForm.bind(this)
+        this.sessionForm = this.sessionForm.bind(this)
+        this.resetPasswordForm = this.resetPasswordForm.bind(this)
     }
 
     submitValidate(values, dispatch) {
@@ -38,9 +42,9 @@ class SessionForm extends Component {
     }
 
     setApiCallEndpoint() {
-        const { currentFormIsSignUp } = this.props
+        const { currentFormIs } = this.props
 
-        if(!currentFormIsSignUp) return loginEndpoint;
+        if(currentFormIs === 'login') return loginEndpoint;
 
         return signupEndpoint;
     }
@@ -61,7 +65,7 @@ class SessionForm extends Component {
     }
 
     handleErrorResponse(error, dispatch) {
-        const { currentFormIsSignUp } = this.props
+        const { currentFormIs } = this.props
 
         if(currentFormIsSignUp) {
             return this.handleSignUpFormError(error, dispatch)
@@ -126,9 +130,7 @@ class SessionForm extends Component {
         );
     }
 
-    render() {
-        const { handleSubmit, pristine, reset, submitting, error,
-                currentFormIsSignUp, toggleFormPurpose } = this.props
+    sessionForm(handleSubmit, error) {
         return(
             <form onSubmit={handleSubmit(this.submitValidate)}>
                 <Field
@@ -144,10 +146,33 @@ class SessionForm extends Component {
                 { error && <strong>{error}</strong> }
                 <button type='submit'>Submit</button>
                 <SignUpLogInPrompt reset={reset}
-                                   toggleFormPurpose={toggleFormPurpose}
-                                   currentFormIsSignUp={currentFormIsSignUp} />
+                                   setFormPurpose={setFormPurpose}
+                                   currentFormIs={currentFormIs} />
+                <RecoverPasswordPrompt reset={reset}
+                                       currentFormIs={currentFormIs}
+                                       setFormPurpose={setFormPurpose} />
             </form>
         );
+    }
+
+    resetPasswordForm() {
+        return(
+            <div>
+                <ResetPasswordForm />
+            </div>
+        );
+    }
+
+    setApproppriateForm(currentFormIs, handleSubmit, error) {
+        if(currentFormIs === 'resetPass') return this.resetPasswordForm();
+
+        return this.sessionForm(handleSubmit, error);
+    }
+
+    render() {
+        const { handleSubmit, pristine, reset, submitting, error,
+                currentFormIs, setFormPurpose } = this.props
+        return this.setApproppriateForm(currentFormIs, handleSubmit, error);
     }
 }
 
@@ -155,3 +180,21 @@ export default reduxForm({
     form: 'test',
     validate: sessionFormSyncValidate
 })(SessionForm)
+
+// <form onSubmit={handleSubmit(this.submitValidate)}>
+//                 <Field
+//                     name='email'
+//                     type='email'
+//                     component={this.renderField}
+//                     label='Email' />
+//                 <Field
+//                     name='password'
+//                     type='password'
+//                     component={this.renderField}
+//                     label='Password' />
+//                 { error && <strong>{error}</strong> }
+//                 <button type='submit'>Submit</button>
+//                 <SignUpLogInPrompt reset={reset}
+//                                    toggleFormPurpose={toggleFormPurpose}
+//                                    currentFormIsSignUp={currentFormIsSignUp} />
+//             </form>

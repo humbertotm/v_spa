@@ -7,15 +7,17 @@ import { entities } from './entities';
 import { TOGGLE_MODAL } from '../actions/modal';
 import { apiResponse } from './testReducer';
 import { session } from './sessionReducer';
-import { signupLoginForm } from './signupLoginFormReducer';
+import { sessionModalForm } from './sessionModalFormReducer';
 import { errorMessage } from './errorMessageReducer';
+import { successMessage } from './successMessageReducer';
 
 const rootReducer = combineReducers({
     modalIsOpen,
     entities,
     apiResponse,
     session,
-    signupLoginForm,
+    sessionModalForm,
+    successMessage,
     errorMessage,
     form: formReducer
 })

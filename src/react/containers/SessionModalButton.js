@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import OpenButton from '../components/OpenButton';
 import SessionModal from '../components/SessionModal';
 import { toggleModal } from '../../redux/actions/modal';
-import { toggleFormPurpose } from '../../redux/actions/toggleFormPurpose';
+import { setFormPurpose } from '../../redux/actions/setFormPurpose';
 import { connect } from 'react-redux';
 
 class SessionModalButton extends Component {
     render() {
         const { modalIsOpen,
                 toggleModal,
-                toggleFormPurpose,
-                currentFormIsSignUp } = this.props
+                setFormPurpose,
+                currentFormIs } = this.props
         const buttonText = 'Sign up!';
         return(
             <div>
@@ -19,8 +19,8 @@ class SessionModalButton extends Component {
                             buttonText={buttonText} />
                 <SessionModal modalIsOpen={modalIsOpen}
                               toggleModal={toggleModal}
-                              currentFormIsSignUp={currentFormIsSignUp}
-                              toggleFormPurpose={toggleFormPurpose} />
+                              currentFormIs={currentFormIs}
+                              setFormPurpose={setFormPurpose} />
             </div>
         );
     }
@@ -29,7 +29,7 @@ class SessionModalButton extends Component {
 const mapStateToProps = (state) => {
     return {
         modalIsOpen: state.modalIsOpen.isOpen,
-        currentFormIsSignUp: state.signupLoginForm.currentFormIsSignUp
+        currentFormIs: state.sessionModalForm.currentFormIs
     }
 }
 
@@ -38,8 +38,8 @@ const mapDispatchToProps = (dispatch) => {
         toggleModal: () => {
             dispatch(toggleModal())
         },
-        toggleFormPurpose: () => {
-            dispatch(toggleFormPurpose())
+        setFormPurpose: () => {
+            dispatch(setFormPurpose())
         }
     }
 }
@@ -47,8 +47,8 @@ const mapDispatchToProps = (dispatch) => {
 SessionModalButton.propTypes = {
     toggleModal: PropTypes.func,
     modalIsOpen: PropTypes.bool,
-    currentFormIsSignUp: PropTypes.bool,
-    toggleForm: PropTypes.func
+    currentFormIs: PropTypes.string,
+    setFormPurpose: PropTypes.func
 }
 
 export default connect(
