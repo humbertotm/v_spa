@@ -1,4 +1,4 @@
-import { isValidEmail } from './sessionFormSyncValidate';
+import { isValidEmail } from './logInSyncValidate';
 
 export default function passResetSyncValidate(values) {
     const errors = {}
