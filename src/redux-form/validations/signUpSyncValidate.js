@@ -1,13 +1,5 @@
 import { EMAIL_REGEX } from '../../utils/constantGlossary';
-
-function isValidPassword(password) {
-    if(password.length < 8) return false
-    return true
-}
-
-export function isValidEmail(email) {
-    return EMAIL_REGEX.test(email)
-}
+import { isValidPassword, isValidEmail } from './logInSyncValidate';
 
 export default function signUpSyncValidate(values) {
     const errors = {}

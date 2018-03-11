@@ -6,7 +6,6 @@ import UserProfile from '../react/containers/UserProfile';
 import Settings from '../react/containers/Settings';
 import ResetPassword from '../react/containers/ResetPassword';
 import NotFound from '../react/components/NotFound';
-// import SessionModalButton from '../react/containers/SessionModalButton';
 import SessionButtons from '../react/containers/SessionButtons';
 
 class App extends Component {

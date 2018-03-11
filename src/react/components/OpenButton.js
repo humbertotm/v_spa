@@ -6,6 +6,8 @@ class OpenButton extends Component {
         this.performAction = this.performAction.bind(this)
     }
 
+    // This method is a workaround. There should be no methods in
+    // this dumb component.
     performAction() {
         const { buttonText,
                 actionToPerform } = this.props
@@ -14,6 +16,10 @@ class OpenButton extends Component {
 
     }
 
+    // Have not been able to fire actionToPerform by providing it to
+    // the onClick event handler as actionToPerform(buttonText).
+    // Find out why in order to get rid of the necessity to use the
+    // workaround method performAction()
     render() {
         const { actionToPerform, buttonText } = this.props
         return(
