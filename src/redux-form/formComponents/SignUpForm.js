@@ -1,6 +1,11 @@
+// Package imports
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import signUpSyncValidate from '../validations/signUpSyncValidate';
+
+// Form validations
+import { signUpSyncValidate } from '../validations/signUpSyncValidate';
+
+// Form utils
 import { renderField } from '../formUtils/renderField';
 
 class SignUpForm extends Component {

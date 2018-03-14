@@ -1,11 +1,18 @@
+// Package imports
 import axios from 'axios';
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { SubmissionError } from 'redux-form';
-import setErrorMessage from '../../redux/actions/setErrorMessage';
-import passResetSyncValidate from '../validations/passResetSyncValidate';
+
+// Action creators
+import { setErrorMessage } from '../../redux/actions/setErrorMessage';
 import { setSuccessMessage } from '../../redux/actions/setSuccessMessage';
-import { renderField } from '../formUtils/renderField';
+
+// Form validations
+import { passResetSyncValidate } from '../validations/passResetSyncValidate';
+
+// Form utils
+// import { renderField } from '../formUtils/renderField';
 
 // Constants
 import { passwordResetEndpoint } from '../../utils/constantGlossary';
@@ -16,17 +23,17 @@ class ResetPasswordForm extends Component {
         this.renderField = this.renderField.bind(this)
     }
 
-    // renderField({ input, label, type, meta: { touched, error } }) {
-    //     return(
-    //         <div>
-    //             <label>{label}</label>
-    //             <div>
-    //                 <input {...input} placeholder={label} type={type} />
-    //                 {touched && error && <span>{error}</span>}
-    //             </div>
-    //         </div>
-    //     );
-    // }
+    renderField({ input, label, type, meta: { touched, error } }) {
+        return(
+            <div>
+                <label>{label}</label>
+                <div>
+                    <input {...input} placeholder={label} type={type} />
+                    {touched && error && <span>{error}</span>}
+                </div>
+            </div>
+        );
+    }
 
     submitValidate(values, dispatch) {
         const endpoint = passwordResetEndpoint
@@ -79,7 +86,7 @@ class ResetPasswordForm extends Component {
                 <Field
                     name='email'
                     type='email'
-                    component={renderField}
+                    component={this.renderField}
                     label='Email' />
                 { error && <strong>{error}</strong> }
                 <button type='submit'>Submit</button>

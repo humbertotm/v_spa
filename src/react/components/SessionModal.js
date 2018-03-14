@@ -1,5 +1,8 @@
+// Package imports
 import React, { Component } from 'react';
 import Modal from 'react-modal';
+
+// Components
 import FormToRender from './FormToRender';
 
 class SessionModal extends Component {

@@ -6,12 +6,12 @@ export function session(state = { loggedInUser: null }, action) {
             loggedInUser: action.userData
         });
     }
-/*
-    if(action.type === LOG_OUT) {
-        return Object.assing({}, state, {
-            loggedInUser: null
-        })
-    }
-*/
+
+    // if(action.type === LOG_OUT) {
+    //     return Object.assing({}, state, {
+    //         loggedInUser: null
+    //     })
+    // }
+
     return state
 }

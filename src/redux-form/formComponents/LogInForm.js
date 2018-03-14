@@ -1,7 +1,12 @@
+// Package imports
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
-import logInSyncValidate from '../validations/logInSyncValidate';
+
+// Form validations
+import { logInSyncValidate } from '../validations/logInSyncValidate';
+
+// Form utils
 import { renderField } from '../formUtils/renderField';
 
 class LogInForm extends Component {

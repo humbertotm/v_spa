@@ -1,5 +1,8 @@
+// Package imports
 import React, { Component } from 'react';
 import { Router, Route, Link, Switch } from 'react-router-dom';
+
+// Components
 import Gallery from '../react/containers/Gallery';
 import PostView from '../react/containers/PostView';
 import UserProfile from '../react/containers/UserProfile';
