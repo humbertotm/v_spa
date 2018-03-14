@@ -54,13 +54,18 @@ export default store => next => action => {
     return axios.get('http://localhost:3000/posts')
         .then(response => {
             console.log(response.status);
-            console.log(response.data);
+            console.log(response.data.posts);
 
-            const posts = response.data.posts;
-            // const normalizedPosts = normalize(posts, post);
+            const postsResponse = response.data.posts;
+            // var posts = postsResponse.map(post => {
+            //     return JSON.parse(post)
+            // })
+
+            // console.log(posts)
+
             return next(actionWith({
                 type: successType,
-                data: posts
+                data: postsResponse
             }));
         }).catch(error => {
             // console.log(error.response.status);

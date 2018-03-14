@@ -1,3 +1,4 @@
+// Package imports
 import React, { Component } from 'react';
 
 class OpenButton extends Component {

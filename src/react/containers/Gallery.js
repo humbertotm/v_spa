@@ -1,10 +1,14 @@
+// Package imports
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+// Components
 import Post from '../components/Post';
+
+// Action creators
 import { callApi } from '../../redux/actions/mockApiCall'
-// import { testActionCreator } from '../../redux/middleware/testApi'
 
 class Gallery extends Component {
     constructor() {
@@ -32,9 +36,10 @@ class Gallery extends Component {
     render() {
         // Not sure ul and li tags are the approppriate ones for this use case.
         const { posts } = this.props
-        const postList = posts.map((post) =>
-                <li>
-                    <Post key={post._id} imageUrl={post.imageUrl} />
+
+        const postList = posts.map((post, index) =>
+                <li key={index}>
+                    <Post imageUrl={post.imageUrl} />
                 </li>
         )
 

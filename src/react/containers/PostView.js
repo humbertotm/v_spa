@@ -1,5 +1,8 @@
+// Package imports
 import React, { Component } from 'react';
 import { withRouter, Route, Link } from 'react-router-dom';
+
+// Components
 import Post from '../components/Post';
 
 class PostView extends Component {

@@ -1,6 +1,6 @@
 import { isValidEmail } from './logInSyncValidate';
 
-export default function passResetSyncValidate(values) {
+export function passResetSyncValidate(values) {
     const errors = {}
 
     if(!values.email) {

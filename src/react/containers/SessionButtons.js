@@ -1,16 +1,21 @@
+// Package imports
 import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { SubmissionError } from 'redux-form';
+
+// Components
 import OpenButton from '../components/OpenButton';
 import LogInForm from '../../redux-form/formComponents/LogInForm';
 import SignUpForm from '../../redux-form/formComponents/SignUpForm';
 import SessionModal from '../components/SessionModal';
+
+// Action creators
 import { toggleModal } from '../../redux/actions/modal';
 import { setFormPurpose } from '../../redux/actions/setFormPurpose';
-import logIn from '../../redux/actions/logIn';
-import setErrorMessage from '../../redux/actions/setErrorMessage';
+import { logIn } from '../../redux/actions/logIn';
+import { setErrorMessage } from '../../redux/actions/setErrorMessage';
 
 // Constants
 import { loginEndpoint,
@@ -182,8 +187,8 @@ class SessionButtons extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        currentFormIs: state.sessionModalForm.currentFormIs,
-        modalIsOpen: state.modalIsOpen.isOpen
+        currentFormIs: state.modalForm.currentFormIs,
+        modalIsOpen: state.modal.isOpen
     }
 }
 

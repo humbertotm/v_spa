@@ -1,7 +1,7 @@
 import { TOGGLE_MODAL } from '../actions/modal';
 import { LOG_IN } from '../actions/logIn';
 
-export function modalIsOpen(state = { isOpen: false }, action) {
+export function modal(state = { isOpen: false }, action) {
     switch(action.type) {
         case TOGGLE_MODAL:
             return Object.assign({}, state, {

@@ -2,21 +2,20 @@
 // to be passed to the createStore function.
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import { modalIsOpen } from './modal';
-import { entities } from './entities';
-import { TOGGLE_MODAL } from '../actions/modal';
+import { modal } from './modalReducer';
+import { entities } from './entitiesReducer';
 import { apiResponse } from './testReducer';
 import { session } from './sessionReducer';
-import { sessionModalForm } from './sessionModalFormReducer';
+import { modalForm } from './modalFormReducer';
 import { errorMessage } from './errorMessageReducer';
 import { successMessage } from './successMessageReducer';
 
 const rootReducer = combineReducers({
-    modalIsOpen,
+    modal,
     entities,
     apiResponse,
     session,
-    sessionModalForm,
+    modalForm,
     successMessage,
     errorMessage,
     form: formReducer

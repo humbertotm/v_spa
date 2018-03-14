@@ -1,7 +1,7 @@
 import { EMAIL_REGEX } from '../../utils/constantGlossary';
 import { isValidPassword, isValidEmail } from './logInSyncValidate';
 
-export default function signUpSyncValidate(values) {
+export function signUpSyncValidate(values) {
     const errors = {}
 
     if(!values.email) {
